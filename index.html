@@ -80,6 +80,11 @@
     .color-btn[data-color="black"] {
       background: black;
     }
+    .color-btn[data-color="white"] {
+        background: white;
+        border: 2px solid #d1d5db; /* slight border so it doesn't disappear */    
+    }
+
 
     .color-btn.active {
       border-color: #f9fafb;
@@ -175,6 +180,8 @@
       <button class="color-btn" data-color="blue" title="Blue"></button>
       <button class="color-btn" data-color="violet" title="Violet"></button>
       <button class="color-btn" data-color="black" title="Black"></button>
+      <button class="color-btn" data-color="white" title="White"></button>
+
 
       <button id="clearBtn" type="button">Clear</button>
     </div>
