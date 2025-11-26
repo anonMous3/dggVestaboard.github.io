@@ -175,8 +175,17 @@ function updateBufferOutput() {
     rowsAsStrings.push(rowStr);
   }
 
-  // Join rows with a single space between them
-  bufferOutput.value = rowsAsStrings.join(" ");
+  // Join 4 row strings with a space (one continuous line)
+  const result = rowsAsStrings.join(" ");
+
+  bufferOutput.value = result;
+
+  // Warning if >255 characters
+  if (result.length > 255) {
+    tooLongMsg.style.display = "block";
+  } else {
+    tooLongMsg.style.display = "none";
+  }
 }
 
 
