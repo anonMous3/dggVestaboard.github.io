@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>21x4 Drawing Canvas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #111827;
+      color: #f9fafb;
+    }
+
+    .wrapper {
+      text-align: center;
+      padding: 20px 30px;
+      background: #1f2937;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      max-width: 600px;
+      width: 100%;
+    }
+
+    h1 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: 1.6rem;
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 16px;
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+
+    .palette {
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .color-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      outline: none;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .color-btn[data-color="red"] {
+      background: red;
+    }
+    .color-btn[data-color="orange"] {
+      background: orange;
+    }
+    .color-btn[data-color="green"] {
+      background: green;
+    }
+    .color-btn[data-color="blue"] {
+      background: blue;
+    }
+    .color-btn[data-color="violet"] {
+      background: violet;
+    }
+    .color-btn[data-color="black"] {
+      background: black;
+    }
+
+    .color-btn.active {
+      border-color: #f9fafb;
+      box-shadow: 0 0 0 2px rgba(249, 250, 251, 0.3);
+    }
+
+    #clearBtn {
+      margin-left: 12px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.8rem;
+      background: #374151;
+      color: #e5e7eb;
+    }
+
+    #clearBtn:hover {
+      background: #4b5563;
+    }
+
+    .canvas-wrapper {
+      margin-top: 12px;
+      padding: 10px;
+      background: #111827;
+      border-radius: 12px;
+      display: inline-block;
+    }
+
+    canvas {
+      display: block;
+      image-rendering: pixelated;
+      cursor: crosshair;
+      background: #000000; /* black = empty */
+    }
+
+    .output-wrapper {
+      margin-top: 16px;
+      text-align: left;
+    }
+
+    .output-wrapper label {
+      font-size: 0.85rem;
+      color: #d1d5db;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    #bufferOutput {
+      width: 100%;
+      min-height: 120px;
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid #374151;
+      background: #111827;
+      color: #e5e7eb;
+      font-family: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco,
+        Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.8rem;
+      resize: vertical;
+      white-space: pre-wrap;       /* allow wrapping */
+      overflow-wrap: anywhere;     /* wrap even long uninterrupted text */
+    }
+
+    #copyBtn {
+      margin-top: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.8rem;
+      background: #2563eb;
+      color: #e5e7eb;
+    }
+
+    #copyBtn:hover {
+      background: #1d4ed8;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <h1>21 × 4 Drawing Canvas</h1>
+    <p>
+      Pick a color, then click and drag on the grid to draw.
+      Black is empty (shown as <code>.</code> in the buffer).
+    </p>
+
+    <div class="palette">
+      <button class="color-btn active" data-color="red" title="Red"></button>
+      <button class="color-btn" data-color="orange" title="Orange"></button>
+      <button class="color-btn" data-color="green" title="Green"></button>
+      <button class="color-btn" data-color="blue" title="Blue"></button>
+      <button class="color-btn" data-color="violet" title="Violet"></button>
+      <button class="color-btn" data-color="black" title="Black"></button>
+
+      <button id="clearBtn" type="button">Clear</button>
+    </div>
+
+    <div class="canvas-wrapper">
+      <!-- 21 columns × 4 rows, each 20px → 420 × 80 canvas -->
+      <canvas id="drawCanvas" width="420" height="80"></canvas>
+    </div>
+
+    <div class="output-wrapper">
+      <label for="bufferOutput">21×4 buffer representation (single line):</label>
+      <textarea id="bufferOutput" readonly></textarea>
+      <button id="copyBtn" type="button">Copy</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
