@@ -78,16 +78,15 @@
       background: blue;
     }
     .color-btn[data-color="violet"] {
-      background: violet;
+      background: rgb(238, 130, 238);
     }
     .color-btn[data-color="black"] {
       background: black;
     }
     .color-btn[data-color="white"] {
-        background: white;
-        border: 2px solid #d1d5db; /* slight border so it doesn't disappear */    
+      background: white;
+      border: 2px solid #d1d5db;
     }
-
 
     .color-btn.active {
       border-color: #f9fafb;
@@ -136,6 +135,20 @@
       margin-bottom: 4px;
     }
 
+    #tooLongMsg {
+      color: #fbbf24;
+      font-size: 0.8rem;
+      margin: 0 0 4px 0;
+      display: none;
+    }
+
+    #invalidMsg {
+      color: #f87171;
+      font-size: 0.8rem;
+      margin: 0 0 6px 0;
+      display: none;
+    }
+
     #bufferOutput {
       width: 100%;
       min-height: 120px;
@@ -148,8 +161,8 @@
         Consolas, "Liberation Mono", "Courier New", monospace;
       font-size: 0.8rem;
       resize: vertical;
-      white-space: pre-wrap;       /* allow wrapping */
-      overflow-wrap: anywhere;     /* wrap even long uninterrupted text */
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
     }
 
     #copyBtn {
@@ -174,6 +187,7 @@
     <p>
       Pick a color, then click and drag on the grid to draw.
       Black is empty (shown as <code>.</code> in the buffer).
+      You can also paste a buffer string below to load an image.
     </p>
 
     <div class="palette">
@@ -186,7 +200,6 @@
       <button class="color-btn" data-color="black" title="Black"></button>
       <button class="color-btn" data-color="white" title="White"></button>
 
-
       <button id="clearBtn" type="button">Clear</button>
     </div>
 
@@ -197,11 +210,15 @@
 
     <div class="output-wrapper">
       <label for="bufferOutput">21×4 buffer representation (single line):</label>
-      <p id="tooLongMsg" style="color:#fbbf24; font-size:0.8rem; margin: 0 0 6px 0; display:none;">
-        too many characters for message, image may not display properly. consider using more black pixels
-        </p>
 
-      <textarea id="bufferOutput" readonly></textarea>
+      <p id="tooLongMsg">
+        too many characters for message, image may not display properly. consider using more black pixels
+      </p>
+      <p id="invalidMsg">
+        invalid string
+      </p>
+
+      <textarea id="bufferOutput"></textarea>
       <button id="copyBtn" type="button">Copy</button>
     </div>
   </div>
